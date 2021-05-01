@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, navigate } from "@reach/router";
+import { navigate } from "@reach/router";
+import { FiArrowRight } from "react-icons/fi";
 
 const Card = ({ url, name, descripton }) => (
   <div className="card">
@@ -8,12 +9,19 @@ const Card = ({ url, name, descripton }) => (
     <p>{descripton}</p>
     <br />
 
-    <button
-      onClick={() => navigate("/detail", { state: { name, url, descripton } })}
-      className="detail-button"
-    >
-      Learn More
-    </button>
+    <div className={"align-center"}>
+      <button
+        onClick={() =>
+          navigate("/detail", { state: { name, url, descripton } })
+        }
+        className="custom-btn"
+      >
+        Read Biography
+        <div style={{padding : ".2rem .5rem"}} className="align-center">
+          <FiArrowRight size={20} />
+        </div>
+      </button>
+    </div>
   </div>
 );
 

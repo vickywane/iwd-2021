@@ -3,6 +3,11 @@
   color: #61dafb;
 }
 
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
 .cards {
   text-align: center;
   display: grid;
@@ -88,19 +93,23 @@
   font-weight: 500;
 }
 
-.detail-button {
+.custom-btn {
   outline: 0;
   height: 40px;
-  width: 13rem;
+  text-align: center;
+  width: 15rem;
   font-size: 17px;
   transition: all 300ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
   background-color: #f88c00;
   border-radius: 3px;
   border: 1px solid #f88c00;
 }
 
-.detail-button:hover {
+.custom-btn:hover {
   cursor: pointer;
   color: #fff;
   background-color: transparent;
@@ -171,6 +180,13 @@
 }
 
 @media (max-width: 1200px) {
+  .bio {
+    width: 35rem;
+    line-height: 1.5em;
+    font-weight: normal;
+    font-size: 18px;
+  }
+
   .banner {
     padding: 0 2rem;
   }
@@ -192,11 +208,17 @@
   }
 }
 
-
 @media (max-width: 1000px) {
   .banner {
     flex-direction: column;
     padding: 0 3rem;
+  }
+
+  .bio {
+    width: 30rem;
+    line-height: 1.5em;
+    font-weight: normal;
+    font-size: 18px;
   }
 
   .img {
@@ -207,5 +229,14 @@
   .cards {
     grid-gap: 5rem 1rem;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .bio {
+    width: 25rem;
+    line-height: 1.5em;
+    font-weight: normal;
+    font-size: 18px;
   }
 }

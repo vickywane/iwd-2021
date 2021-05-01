@@ -1,5 +1,6 @@
 import React from "react";
 import { animateScroll as scroll } from "react-scroll";
+import { FiCalendar, FiExternalLink } from "react-icons/fi";
 
 const Banner = ({ data }) => (
   <div>
@@ -18,10 +19,25 @@ const Banner = ({ data }) => (
             <br /> Achieving an equal future <br />
             in a COVID-19 world.
           </h1>
-          <p className="banner-text">8th, March, 2021 </p>
 
-          <a href="https://www.youtube.com/watch?v=hyOOQ_6L-2I" target="_blank">
-            <button className="detail-button"> View Event Coverage </button>
+          <div className="flex">
+            <div className="align-center" style={{ padding: "0 .6rem" }}>
+              <FiCalendar size={20} />
+            </div>
+            <p className="banner-text">8th, March, 2021 </p>
+          </div>
+
+          <a
+            style={{ textDecoration: "none" }}
+            href="https://www.youtube.com/watch?v=hyOOQ_6L-2I"
+            target="_blank"
+          >
+            <button className="custom-btn">
+              View Event Coverage
+              <div style={{ padding: ".2rem .5rem" }} className="align-center">
+                <FiExternalLink size={20} />
+              </div>
+            </button>
           </a>
         </div>
       </div>

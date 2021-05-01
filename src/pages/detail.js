@@ -1,7 +1,7 @@
 import React from "react";
 import { navigate } from "@reach/router";
 import "../App.css";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiCalendar, FiAward } from "react-icons/fi";
 
 const Detail = (props) => {
   const {} = props;
@@ -16,7 +16,7 @@ const Detail = (props) => {
               navigate(-1);
             }}
           >
-            <div style={{padding : '0 .7rem'}} className="align-center">
+            <div style={{ padding: "0 .7rem" }} className="align-center">
               <FiArrowLeft size={20} />
             </div>
 
@@ -27,9 +27,27 @@ const Detail = (props) => {
 
       <div className="detail">
         <div>
-          <img src="https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png" />
+          <img className="img" src="https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png" />
           <h1> Marie E. Curie </h1>
-          <p>Born 12, May, 1999, and sadly died on 1909.</p>
+
+          <div className="align-center">
+            <div className="flex">
+              <div className={"align-center"} style={{ padding: "0 .5rem" }}>
+                <FiCalendar size={20} />
+              </div>
+              <p>Born 12, May, 1999, and sadly died on 1909.</p>
+            </div>
+          </div>
+
+          <div className="align-center">
+            <div className="flex">
+              <div className={"align-center"} style={{ padding: "0 .5rem" }}>
+                <FiAward size={20} />
+              </div>
+              <p>Known for her Educational impact in Sciences.</p>
+            </div>
+          </div>
+
           <p className="bio">
             Marie Curie was the first woman to win a Nobel Prize, in Physics,
             and with her later win, in Chemistry, she became the first person to
