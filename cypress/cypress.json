@@ -1,0 +1,6 @@
+{
+    "fixturesFolder": false,
+    "testFiles": "**/*.cy-spec.js",
+    "experimentalComponentTesting": true,
+    "componentFolder": "cypress/component"
+  }

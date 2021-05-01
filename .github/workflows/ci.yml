@@ -1,0 +1,79 @@
+name: CI for IWD-2021-page UI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install npm
+      run: |
+        npm version
+        npm ci
+      env:
+        CI: true
+
+    - name: Test Suite
+      uses: cypress-io/github-action@v2
+      with:
+        start: npm run start
+        record: false # cypress.io free recording limit exceeded
+        wait-on: 'http://localhost:3000'
+        command: npm test
+
+    - name: Upload Cypress test recorded videos for debugging
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: cypress-videos
+        path: cypress/videos
+
+    - name: Upload Cypress test recorded screenshots for debugging
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: cypress-screenshots
+        path: cypress/videos/tests
+
+    - name: Code Coverage Report
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} 
+        file: ./coverage/coverage-final.json
+        fail_ci_if_error: true
+        path_to_write_report: ./coverage/codecov_report.txt
+
+    - name: Build app for production
+      run: |
+          npm run build --if-present
+      env:
+          CI: false
+
+    # - name: Run Lighthouse check against local production build
+    #   uses: treosh/lighthouse-ci-action@v2
+    #   with:
+    #       configPath: '.github/lighthouse/lighthouserc-static-dist-dir.yml'
+    #       uploadArtifacts: true # save results as an action artifacts
+    #       temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+
+    - name: Semantic Release
+      run: npx semantic-release
+      env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
