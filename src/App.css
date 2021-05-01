@@ -11,6 +11,75 @@
   place-items: center;
 }
 
+.author-link {
+  color: #f88c00;
+  text-decoration: wavy;
+}
+
+.iframe-ctn {
+  display: flex;
+  justify-content: center;
+}
+
+.iframe {
+  height: 370px;
+  border-radius: 10px;
+  width: 600px;
+}
+
+.back-btn {
+  display: flex;
+  transition: all 300ms;
+  flex-direction: row;
+}
+
+.back-btn:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  height: 55px;
+  background-color: #141821;
+  display: flex;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+.detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: none;
+  height: calc(100vh - 55px);
+}
+
+.bio {
+  width: 42rem;
+  line-height: 1.6em;
+  font-weight: normal;
+  font-size: 20px;
+  text-align: left;
+}
+
+.footer {
+  /* height: 50px; */
+  background-color: #141821;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .banner-text {
   font-size: 18px;
 }
@@ -20,14 +89,15 @@
 }
 
 .detail-button {
-  height: 45px;
-  width: 15rem;
+  outline: 0;
+  height: 40px;
+  width: 13rem;
   font-size: 17px;
   transition: all 300ms;
   color: #fff;
-  background-color: #F88C00;
+  background-color: #f88c00;
   border-radius: 3px;
-  border: 1px solid #F88C00;
+  border: 1px solid #f88c00;
 }
 
 .detail-button:hover {
@@ -97,5 +167,45 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .banner {
+    padding: 0 2rem;
+  }
+
+  .iframe {
+    height: 350px;
+    border-radius: 5px;
+    width: 500px;
+  }
+
+  .img {
+    height: 200px;
+    width: 200px;
+  }
+
+  .cards {
+    grid-gap: 5rem 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .banner {
+    flex-direction: column;
+    padding: 0 3rem;
+  }
+
+  .img {
+    height: 200px;
+    width: 200px;
+  }
+
+  .cards {
+    grid-gap: 5rem 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   }
 }

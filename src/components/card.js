@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 
 const Card = ({ url, name, descripton }) => (
   <div className="card">
@@ -8,9 +8,12 @@ const Card = ({ url, name, descripton }) => (
     <p>{descripton}</p>
     <br />
 
-    <Link to="/detail">
-      <button className="detail-button">Learn More</button>
-    </Link>
+    <button
+      onClick={() => navigate("/detail", { state: { name, url, descripton } })}
+      className="detail-button"
+    >
+      Learn More
+    </button>
   </div>
 );
 

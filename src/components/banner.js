@@ -19,7 +19,10 @@ const Banner = ({ data }) => (
             in a COVID-19 world.
           </h1>
           <p className="banner-text">8th, March, 2021 </p>
-          <button className="detail-button"> View Event Coverage </button>
+
+          <a href="https://www.youtube.com/watch?v=hyOOQ_6L-2I" target="_blank">
+            <button className="detail-button"> View Event Coverage </button>
+          </a>
         </div>
       </div>
 
@@ -34,16 +37,17 @@ const Banner = ({ data }) => (
           <br />
           <br />
           <br />
-          <iframe
-            style={{ borderRadius: "15px" }}
-            width="650"
-            height="370"
-            src="https://www.youtube.com/embed/hyOOQ_6L-2I"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
+          <div className="iframe-ctn">
+            <iframe
+              className="iframe"
+              src="https://www.youtube.com/embed/hyOOQ_6L-2I"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            />
+          </div>
+
           <p
             className="scroll-btn"
             onClick={() => {
