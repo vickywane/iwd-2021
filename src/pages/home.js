@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { FiArrowDown } from "react-icons/fi";
+import axios from "axios";
 
 import Loader from "../components/loader";
 import "../App.css";
 import Card from "../components/card";
 import Banner from "../components/banner";
 import Footer from "../components/footer";
-
-const data = [
-  "https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png",
-  "https://res.cloudinary.com/dkfptto8m/image/upload/v1619869813/highbee-removebg-preview.png",
-  "https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png",
-  "https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png",
-  "https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png",
-  "https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png",
-];
 
 const Home = () => {
   const [isLoading, setLoading] = useState(false);
@@ -27,22 +19,21 @@ const Home = () => {
   }, [currentPage]);
 
   const fetchData = async () => {
-    try {
-      setLoading(true);
+    setLoading(true);
 
-      const request = await fetch(
+    try {
+      const request = await axios.get(
         `${process.env.REACT_APP_WORDPRESS_ENDPOINT}/posts?per_page=6&page=${currentPage}`
       );
-
       if (request.status === 200) {
-        const data = await request.json();
-
-        setData(data);
-      } else if (request.status === 400) {
+        setData(request.data);
+      }
+      //   WP REST API doesnt provide a max_page or min_page to better handle this.
+      else if (request.status === 400) {
         shouldLoadMore(false);
       }
     } catch (e) {
-      console.log(`Error fetching ${e}`);
+      console.log(`Error fetching posts ${e}`);
     } finally {
       setLoading(false);
     }
@@ -96,5 +87,5 @@ const Home = () => {
     </div>
   );
 };
- 
+
 export default Home;

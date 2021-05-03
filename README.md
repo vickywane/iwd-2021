@@ -36,5 +36,3 @@ You can participate in many ways. The application codes are available in their r
 Easily contribute to the content of the style guide by adding new recommendations, making corrections or adding examples in the form of images or videos:
 
 If you have Git installed on your system, [cloning](https://help.github.com/articles/cloning-a-repository/) is preferred way to get the contents since it allows you to contribute back.
-
-

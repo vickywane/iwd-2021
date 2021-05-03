@@ -62,6 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
   text-align: center;
   overflow: none;
   height: calc(100vh - 55px);

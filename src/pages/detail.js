@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { navigate } from "@reach/router";
-import "../App.css";
-import { FiArrowLeft, FiCalendar, FiAward } from "react-icons/fi";
+import { FiArrowLeft, FiAward } from "react-icons/fi";
+import axios from "axios";
+
 import Loader from "../components/loader";
-
-const stripString = (str) => {
-  let strippedString = str.replace(/(<([^>]+)>)/gi, "");
-
-  return strippedString;
-};
+import "../App.css";
+import { fetchImage, stripString } from "../utils/";
 
 const Detail = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
 
   useEffect(() => {
     getPost();
@@ -20,16 +18,17 @@ const Detail = ({ id }) => {
 
   const getPost = async () => {
     try {
-      const req = await fetch(
+      const req = await axios.get(
         `${process.env.REACT_APP_WORDPRESS_ENDPOINT}/posts/${id}`
       );
 
-      const post = await req.json();
-      setPost(post);
+      setPost(req.data);
+      setImgUrl(await fetchImage(req.data.featured_media));
 
-      setLoading(false);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,24 +53,13 @@ const Detail = ({ id }) => {
 
       <div className="detail">
         {loading ? (
-          <Loader />
+          <div id="loader" >
+            <Loader />
+          </div>
         ) : (
           <div>
-            <img
-              alt="Marie E. Curie"
-              className="img"
-              src="https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png"
-            />
+            <img id="heroine-image" alt="Marie E. Curie" className="img" src={imgUrl} />
             <h1> {post.title.rendered} </h1>
-
-            <div className="align-center">
-              <div className="flex">
-                <div className={"align-center"} style={{ padding: "0 .5rem" }}>
-                  <FiCalendar size={20} />
-                </div>
-                <p>Born 12, May, 1999, and sadly died on 1909.</p>
-              </div>
-            </div>
 
             <div className="align-center">
               <div className="flex">
@@ -83,14 +71,6 @@ const Detail = ({ id }) => {
             </div>
 
             <p className="bio">{stripString(post.content.rendered)}</p>
-
-            <p>
-              {" "}
-              View Wiki page in her honor{" "}
-              <a href="#" rel="noreferrer" target="_blank">
-                here
-              </a>{" "}
-            </p>
           </div>
         )}
       </div>
