@@ -23,7 +23,7 @@ This Web Application was built to appreciate the hard-work and effort put in by 
 
 ### Testing:
 
-This application is fully E2E tested using Cypress tests.
+All End-to-end(E2E) tests within this application are written using [Cypress](https://docs.cypress.io/). All network requests within the application are tested using [Moxios](https://www.npmjs.com/package/moxios).
 
 ### Contributions
 
