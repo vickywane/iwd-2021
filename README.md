@@ -1,4 +1,4 @@
-<h2 style="text-align: center;" > International Women Day, <i>March 8th, 2021 <i>. <br />  <span style="font-size: 1.5rem" > Women in <b>leadership</b>, Achieving an equal future <br /> in a COVID-19 world. </span> </h2>
+<h2 style="text-align: center;" > International Women Day, <i>March 8th, 2021 </i>. <br />  <span style="font-size: 1.5rem" > Women in <b>leadership</b>, Achieving an equal future <br /> in a COVID-19 world. </span> </h2>
 
 ## Primary Motivation
 This Web Application was built to appreciate the hard-work and effort put in by women around the world.
