@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { navigate } from "@reach/router";
 import "../App.css";
 import { FiArrowLeft, FiCalendar, FiAward } from "react-icons/fi";
+import Loader from "../components/loader";
 
-const Detail = (props) => {
-  const {} = props;
+const stripString = (str) => {
+  let strippedString = str.replace(/(<([^>]+)>)/gi, "");
+
+  return strippedString;
+};
+
+const Detail = ({ id }) => {
+  const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  const getPost = async () => {
+    try {
+      const req = await fetch(
+        `${process.env.REACT_APP_WORDPRESS_ENDPOINT}/posts/${id}`
+      );
+
+      const post = await req.json();
+      setPost(post);
+
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
-    <div className="App">
+    <div role="main" className="App">
       <header className="navbar">
         <nav>
           <div
@@ -26,44 +53,46 @@ const Detail = (props) => {
       </header>
 
       <div className="detail">
-        <div>
-          <img className="img" src="https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png" />
-          <h1> Marie E. Curie </h1>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div>
+            <img
+              alt="Marie E. Curie"
+              className="img"
+              src="https://res.cloudinary.com/dkfptto8m/image/upload/v1619793474/marie.png"
+            />
+            <h1> {post.title.rendered} </h1>
 
-          <div className="align-center">
-            <div className="flex">
-              <div className={"align-center"} style={{ padding: "0 .5rem" }}>
-                <FiCalendar size={20} />
+            <div className="align-center">
+              <div className="flex">
+                <div className={"align-center"} style={{ padding: "0 .5rem" }}>
+                  <FiCalendar size={20} />
+                </div>
+                <p>Born 12, May, 1999, and sadly died on 1909.</p>
               </div>
-              <p>Born 12, May, 1999, and sadly died on 1909.</p>
             </div>
-          </div>
 
-          <div className="align-center">
-            <div className="flex">
-              <div className={"align-center"} style={{ padding: "0 .5rem" }}>
-                <FiAward size={20} />
+            <div className="align-center">
+              <div className="flex">
+                <div className={"align-center"} style={{ padding: "0 .5rem" }}>
+                  <FiAward size={20} />
+                </div>
+                <p>Known for her Educational impact in Sciences.</p>
               </div>
-              <p>Known for her Educational impact in Sciences.</p>
             </div>
+
+            <p className="bio">{stripString(post.content.rendered)}</p>
+
+            <p>
+              {" "}
+              View Wiki page in her honor{" "}
+              <a href="#" rel="noreferrer" target="_blank">
+                here
+              </a>{" "}
+            </p>
           </div>
-
-          <p className="bio">
-            Marie Curie was the first woman to win a Nobel Prize, in Physics,
-            and with her later win, in Chemistry, she became the first person to
-            claim Nobel honors twice. Her efforts with her husband Pierre led to
-            the discovery of polonium and radium, and she championed the
-            development of X-rays
-          </p>
-
-          <p>
-            {" "}
-            View Wiki page in her honor{" "}
-            <a href="#" target="_blank">
-              here
-            </a>{" "}
-          </p>
-        </div>
+        )}
       </div>
     </div>
   );
